@@ -1,6 +1,15 @@
-%link{:rel => :stylesheet, :type => 'text/css', :href => 'application.css'}
+%link{:rel => :stylesheet, :type => 'text/css', :href => '/application.css'}
+%script{:type => 'text/javascript',
+        :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'}
+%script{:type => 'text/javascript', :src => '/jquery.jtwitter.js'}
+%script{:type => 'text/javascript', :src => '/application.js'}
 %html
   %head
-    %title Of The Song
+    %title Subtwitle
   %body
-    Hello
+    #content
+      %h1 Subtwitle
+      %form
+        %label{:for => :username} What's your Twitter handle?
+        %input{:type => :text, :id => :username, :name => :username}
+        %input{:type => :submit, :value => "Go"}
