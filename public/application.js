@@ -29,7 +29,9 @@ Subtwitle = (function() {
     var words = $.grep(caption.find('.tweet').text().split(' '), goodWord);
     $.googli(words.join(' ') + ' funny', function(data) {
       if(data.responseData.results.length > 0) {
-        var images = data.responseData.results.sort(imageSort);
+        var images = data.responseData.results
+        images = $.grep(images, photobucketImage, true);
+        images = images.sort(imageSort);
         caption.find('img').attr('src', images[0].url)
       } else {
         caption.find('img').hide();
@@ -60,6 +62,10 @@ Subtwitle = (function() {
         img.attr('src', photo);
       });
     });
+  };
+
+  var photobucketImage = function(img) {
+    return img.url.match(/img\.photobucket\.com/);
   };
 
   var squareness = function(img) {
