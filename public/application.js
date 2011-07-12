@@ -2,6 +2,7 @@ Subtwitle = (function() {
   var init = function() {
     $('form').submit(fillTweets);
     $('#username').focus();
+    if ($('#username').val().length > 0) $('form').submit();
   };
 
   var clearTweets = function() {
