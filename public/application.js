@@ -4,12 +4,19 @@ Subtwitle = (function() {
     $('#username').focus();
   };
 
+  var clearTweets = function() {
+    $('.caption.loaded').remove();
+  };
+
   var fillTweets = function(evt) {
     evt.preventDefault();
     $.jTwitter($('#username').val(), 25, function(tweets) {
+      clearTweets();
+
       $.each(tweets, function(i, tweet){
         var newTweet = $('#captions .caption:first').clone()
         newTweet.find('.tweet').text(tweet.text);
+        newTweet.addClass('loaded');
         newTweet.appendTo('#captions');
         newTweet.show();
         findImage(newTweet);
