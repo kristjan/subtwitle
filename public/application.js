@@ -6,7 +6,7 @@ Subtwitle = (function() {
 
   var fillTweets = function(evt) {
     evt.preventDefault();
-    $.jTwitter($('#username').val(), 10, function(tweets) {
+    $.jTwitter($('#username').val(), 25, function(tweets) {
       $.each(tweets, function(i, tweet){
         var newTweet = $('#captions .caption:first').clone()
         newTweet.find('.tweet').text(tweet.text);
@@ -19,9 +19,10 @@ Subtwitle = (function() {
 
   var findImage = function(caption) {
     var words = $.grep(caption.find('.tweet').text().split(' '), goodWord);
-    $.googli(words.join(' '), function(data) {
-      if(data.responseData.results[0]) {
-        caption.find('img').attr('src', data.responseData.results[0].url)
+    $.googli(words.join(' ') + ' funny', function(data) {
+      if(data.responseData.results.length > 0) {
+        var images = data.responseData.results.sort(imageSort);
+        caption.find('img').attr('src', images[0].url)
       } else {
         caption.find('img').hide();
       }
@@ -29,8 +30,22 @@ Subtwitle = (function() {
   };
 
   var goodWord = function(word, i) {
-    return word.length > 3 && word.length < 12;
+    if (word.match(/^[\W]/)) return false;
+    return word.length > 5;
   }
+
+  var imageSort = function(a, b) {
+    return imageScore(b) - imageScore(a);
+  };
+
+  var imageScore = function(img) {
+    return parseInt(img.width);
+  };
+
+  var squareness = function(img) {
+    var ratio = parseInt(img.height)/parseInt(img.width);
+    return (ratio < 1) ? 1/ratio : ratio;
+  };
 
   return {
     init: init,
