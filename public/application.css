@@ -29,11 +29,14 @@ label {
 
 #content {
   background-color: #FFF;
-  height: 100%;
   margin: 0px auto;
   text-align: center;
-  padding: 50px;
+  padding: 50px 50px 100px;
   width: 960px;
+}
+
+form {
+  margin: 0px auto 50px;
 }
 
 input[type=text] {
@@ -49,4 +52,26 @@ input[type=submit] {
   font-weight: bold;
   height: 37px;
   width: 37px;
+}
+
+input,
+.caption {
+  border-radius: 2px;
+}
+
+.caption {
+  border: 1px solid #666;
+  display: none;
+  margin: 20px auto;
+  padding: 20px;
+  width: 400px;
+}
+
+.caption img {
+  height: auto;
+  width: 380px;
+}
+
+.caption .tweet {
+  text-align: left;
 }

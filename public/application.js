@@ -1,19 +1,24 @@
 Subtwitle = (function() {
   var init = function() {
-    $('form').submit(function(evt) {
-      evt.preventDefault();
-      $.jTwitter($('#username').val(), 10, function(tweets) {
-        $.each(tweets, function(i, tweet){
-          console.log(tweet.text);
-        });
-      });
-    });
-
+    $('form').submit(fillTweets);
     $('#username').focus();
   };
 
+  var fillTweets = function(evt) {
+    evt.preventDefault();
+    $.jTwitter($('#username').val(), 10, function(tweets) {
+      $.each(tweets, function(i, tweet){
+        var newTweet = $('#captions .caption:first').clone()
+        newTweet.find('.tweet').text(tweet.text);
+        newTweet.appendTo('#captions');
+        newTweet.show();
+      });
+    });
+  };
+
   return {
-    init: init
+    init: init,
+    fillTweets: fillTweets
   };
 })();
 
