@@ -65,7 +65,7 @@ Subtwitle = (function() {
   };
 
   var photobucketImage = function(img) {
-    return img.url.match(/img\.photobucket\.com/);
+    return img.url.match(/photobucket\.com/);
   };
 
   var squareness = function(img) {
