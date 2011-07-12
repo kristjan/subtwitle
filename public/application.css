@@ -32,7 +32,7 @@ label {
   margin: 0px auto;
   text-align: center;
   padding: 50px 50px 100px;
-  width: 960px;
+  width: 860px;
 }
 
 form {
@@ -78,4 +78,40 @@ input,
   background-color: #FFF;
   padding: 10px;
   text-align: left;
+}
+
+#footer {
+  background-color: #D5F6FB;
+  border-radius: 0px 0px 5px 5px;
+  margin: 0px auto 50px;
+  padding: 20px;
+  width: 920px;
+}
+
+.people {
+  margin: 0px auto;
+  width: 591px;
+}
+
+.person {
+  display: inline-block;
+  line-height: 50px;
+  padding: 10px 20px;
+  width: 250px;
+}
+.person img {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.person a {
+  color: #29C;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.person.kripet {
+  text-align: right;
+}
+.person.steve_rit {
+  border-left: 1px solid #29C;
 }

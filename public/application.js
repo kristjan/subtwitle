@@ -50,6 +50,18 @@ Subtwitle = (function() {
     return parseInt(img.width);
   };
 
+  var loadPhotos = function() {
+    $('.person').each(function(i, person) {
+      person = $(person);
+      var username = person.clone().removeClass('person').attr('class');
+      $.jTwitter(username, 0, function(tweets) {
+        var img = person.find('img');
+        var photo = tweets[0].user.profile_image_url;
+        img.attr('src', photo);
+      });
+    });
+  };
+
   var squareness = function(img) {
     var ratio = parseInt(img.height)/parseInt(img.width);
     return (ratio < 1) ? 1/ratio : ratio;
@@ -57,10 +69,11 @@ Subtwitle = (function() {
 
   return {
     init: init,
-    fillTweets: fillTweets
+    loadPhotos: loadPhotos
   };
 })();
 
 $(document).ready(function() {
   Subtwitle.init();
+  Subtwitle.loadPhotos();
 });
