@@ -60,18 +60,22 @@ input,
 }
 
 .caption {
-  border: 1px solid #666;
+  background-color: #D5F6FB;
   display: none;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 50px auto 100px;
+  padding: 40px 50px;
   width: 400px;
 }
 
 .caption img {
   height: auto;
-  width: 380px;
+  margin-bottom: 10px;
+  padding; 100px;
+  width: 400px;
 }
 
 .caption .tweet {
+  background-color: #FFF;
+  padding: 10px;
   text-align: left;
 }

@@ -12,9 +12,25 @@ Subtwitle = (function() {
         newTweet.find('.tweet').text(tweet.text);
         newTweet.appendTo('#captions');
         newTweet.show();
+        findImage(newTweet);
       });
     });
   };
+
+  var findImage = function(caption) {
+    var words = $.grep(caption.find('.tweet').text().split(' '), goodWord);
+    $.googli(words.join(' '), function(data) {
+      if(data.responseData.results[0]) {
+        caption.find('img').attr('src', data.responseData.results[0].url)
+      } else {
+        caption.find('img').hide();
+      }
+    });
+  };
+
+  var goodWord = function(word, i) {
+    return word.length > 3 && word.length < 12;
+  }
 
   return {
     init: init,
