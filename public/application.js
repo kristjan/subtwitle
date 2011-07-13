@@ -80,9 +80,11 @@ Subtwitle = (function() {
       person = $(person);
       var username = person.clone().removeClass('person').attr('class');
       $.jTwitter(username, 0, function(tweets) {
-        var img = person.find('img');
-        var photo = tweets[0].user.profile_image_url;
-        img.attr('src', photo);
+        if (tweets.length > 0) {
+          var img = person.find('img');
+          var photo = tweets[0].user.profile_image_url;
+          img.attr('src', photo);
+        }
       });
     });
   };
