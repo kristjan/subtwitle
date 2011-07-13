@@ -22,6 +22,7 @@ Subtwitle = (function() {
   };
 
   var loadUser = function(username, popped) {
+    if (username.length == 0) return;
     $.jTwitter(username, 25, function(tweets) {
       clearTweets();
       if (!popped) {
