@@ -115,8 +115,11 @@ input,
   line-height: 14px;
   margin-top: 15px;
 }
+.person div span {
+  color: #999;
+}
 
 .person.kripet {
   text-align: right;
-  border-right: 1px solid #29C;
+  border-right: 1px solid #3AD;
 }
