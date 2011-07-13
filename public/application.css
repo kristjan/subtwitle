@@ -90,14 +90,15 @@ input,
 
 .people {
   margin: 0px auto;
-  width: 591px;
+  width: 685px;
 }
 
 .person {
   display: inline-block;
   line-height: 50px;
   padding: 10px 20px;
-  width: 250px;
+  vertical-align: top;
+  width: 300px;
 }
 .person img {
   margin-right: 10px;
@@ -108,10 +109,14 @@ input,
   font-weight: bold;
   text-decoration: none;
 }
+.person div {
+  color: #666;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 15px;
+}
 
 .person.kripet {
   text-align: right;
-}
-.person.steve_rit {
-  border-left: 1px solid #29C;
+  border-right: 1px solid #29C;
 }
