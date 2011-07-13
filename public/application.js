@@ -1,20 +1,35 @@
 Subtwitle = (function() {
   var init = function() {
-    $('form').submit(loadUser);
+    $('form').submit(fireForm);
     $('#username').focus();
     if ($('#username').val().length > 0) $('form').submit();
+    window.onpopstate = loadLastUser;
   };
 
   var clearTweets = function() {
     $('.caption.loaded').remove();
   };
 
-  var loadUser = function(evt) {
+  var fireForm = function(evt) {
     evt.preventDefault();
-    var username = $('#username').val()
+    loadUser($('#username').val());
+  };
+
+  var loadLastUser = function(evt) {
+    console.log("Back hit");
+    var urlParts = document.URL.split('/');
+    var username = urlParts[urlParts.length - 1];
+    loadUser(username, true);
+  };
+
+  var loadUser = function(username, popped) {
     $.jTwitter(username, 25, function(tweets) {
       clearTweets();
-      window.history.pushState('', 'Subtwitle/' + username, '/' + username);
+      if (!popped) {
+        window.history.pushState(username, 'Subtwitle/' + username,
+                                 '/' + username);
+      }
+      $('#username').val(username).focus();
 
       $.each(tweets, function(i, tweet){
         var newTweet = $('#captions .caption:first').clone()
