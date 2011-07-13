@@ -1,6 +1,6 @@
 Subtwitle = (function() {
   var init = function() {
-    $('form').submit(fillTweets);
+    $('form').submit(loadUser);
     $('#username').focus();
     if ($('#username').val().length > 0) $('form').submit();
   };
@@ -9,10 +9,12 @@ Subtwitle = (function() {
     $('.caption.loaded').remove();
   };
 
-  var fillTweets = function(evt) {
+  var loadUser = function(evt) {
     evt.preventDefault();
-    $.jTwitter($('#username').val(), 25, function(tweets) {
+    var username = $('#username').val()
+    $.jTwitter(username, 25, function(tweets) {
       clearTweets();
+      window.history.pushState('', 'Subtwitle/' + username, '/' + username);
 
       $.each(tweets, function(i, tweet){
         var newTweet = $('#captions .caption:first').clone()
