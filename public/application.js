@@ -16,7 +16,6 @@ Subtwitle = (function() {
   };
 
   var loadLastUser = function(evt) {
-    console.log("Back hit");
     var urlParts = document.URL.split('/');
     var username = urlParts[urlParts.length - 1];
     loadUser(username, true);
@@ -34,10 +33,17 @@ Subtwitle = (function() {
       $.each(tweets, function(i, tweet){
         var newTweet = $('#captions .caption:first').clone()
         newTweet.find('.tweet').text(tweet.text);
+        var tweetButton = newTweet.find('.twitter-share-button');
+        tweetButton.attr('href',
+          tweetButton.attr('href') + '?' + $.param({
+            text : "Just found an awesome caption on Subtwitle",
+            url : document.URL
+          })
+        );
         newTweet.addClass('loaded');
         newTweet.appendTo('#captions');
-        newTweet.show();
         findImage(newTweet);
+        newTweet.show();
       });
     });
   };
