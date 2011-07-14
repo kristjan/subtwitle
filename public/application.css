@@ -123,7 +123,7 @@ input,
   text-align: right;
   border-right: 1px solid #3AD;
 }
-.twitter-share-button {
+.tweet_link {
   display: block;
   height: 20px;
   background: url('https://dev.twitter.com/widgets/images/tweet.png');
@@ -134,9 +134,9 @@ input,
   text-indent: -10000px;
   width: 55px;
 }
-.twitter-share-button:hover {
+.tweet_link:hover {
   background-position: center -21px;
 }
-.twitter-share-button:active {
+.tweet_link:active {
   background-position: center -42px;
 }

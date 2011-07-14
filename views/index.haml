@@ -4,6 +4,8 @@
     %link{:rel => :stylesheet, :type => 'text/css', :href => '/application.css'}
     %script{:type => 'text/javascript',
             :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'}
+    %script{:type => 'text/javascript',
+            :src => 'http://platform.twitter.com/widgets.js'}
     %script{:type => 'text/javascript', :src => '/jquery.jtwitter.js'}
     %script{:type => 'text/javascript', :src => '/jquery.googli.js'}
     %script{:type => 'text/javascript', :src => '/application.js'}
@@ -30,8 +32,7 @@
         .caption
           %img
           .tweet
-          %a.twitter-share-button{:href => 'http://twitter.com/share',
-                                  :target => '_blank'} Tweet
+          %a.tweet_link{:href => 'https://twitter.com/intent/tweet'} Tweet
     #footer
       .people
         .person.kripet

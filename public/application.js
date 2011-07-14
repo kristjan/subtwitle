@@ -34,9 +34,9 @@ Subtwitle = (function() {
       $.each(tweets, function(i, tweet){
         var newTweet = $('#captions .caption:first').clone()
         newTweet.find('.tweet').text(tweet.text);
-        var tweetButton = newTweet.find('.twitter-share-button');
-        tweetButton.attr('href',
-          tweetButton.attr('href') + '?' + $.param({
+        tweetLink = newTweet.find('.tweet_link');
+        tweetLink.attr('href',
+          tweetLink.attr('href') + '?' + $.param({
             text : "Just found an awesome caption on Subtwitle",
             url : document.URL
           })
