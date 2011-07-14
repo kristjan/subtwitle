@@ -49,11 +49,11 @@ Subtwitle = (function() {
 
   var loadSingleTweet = function(tweet_id, image_url) {
     $.jTwitter.tweet(tweet_id, function(tweet) {
-      createCaption(tweet);
+      createCaption(tweet, image_url);
     });
   };
 
-  var createCaption = function(tweet) {
+  var createCaption = function(tweet, image_url) {
     var caption = $('#captions .caption:first').clone()
     caption.find('.tweet').text(tweet.text);
     tweetLink = caption.find('.tweet_link');
@@ -65,7 +65,11 @@ Subtwitle = (function() {
     );
     caption.addClass('loaded');
     caption.appendTo('#captions');
-    findImage(caption);
+    if (typeof (image_url) === 'undefined' || image_url.length == 0) {
+      findImage(caption);
+    } else {
+      caption.find('img').attr('src', image_url);
+    }
     caption.show();
   };
 
@@ -76,7 +80,7 @@ Subtwitle = (function() {
         var images = data.responseData.results
         images = $.grep(images, photobucketImage, true);
         images = images.sort(imageSort);
-        caption.find('img').attr('src', images[0].url)
+        caption.find('img').attr('src', images[0].url);
       } else {
         caption.find('img').hide();
       }
