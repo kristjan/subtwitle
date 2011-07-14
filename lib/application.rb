@@ -11,8 +11,10 @@ class Application < Sinatra::Base
   end
 
   helpers do
-    def add_javascript(script)
-      (@_javascripts ||= []) << script
+    def javascripts(*scripts)
+      @_javascripts ||= []
+      @_javascripts += scripts
+      @_javascripts
     end
   end
 end

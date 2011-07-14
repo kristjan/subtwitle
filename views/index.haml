@@ -1,10 +1,10 @@
-- add_javascript '/application.js'
 %h1 Subtwitle
 %form
   %label{:for => :username} What's your Twitter handle?
   %input{:type => :text, :id => :username,
          :name => :username, :value => @username}
   %input{:type => :submit, :value => "Go"}
+- javascripts 'application'
 #captions
   .caption
     %img
