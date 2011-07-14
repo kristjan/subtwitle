@@ -9,4 +9,10 @@ class Application < Sinatra::Base
     @username = params[:username]
     haml :index
   end
+
+  helpers do
+    def add_javascript(script)
+      (@_javascripts ||= []) << script
+    end
+  end
 end

@@ -1,58 +1,12 @@
-%html
-  %head
-    %title Subtwitle
-    %link{:rel => :stylesheet, :type => 'text/css', :href => '/application.css'}
-    %script{:type => 'text/javascript',
-            :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'}
-    %script{:type => 'text/javascript',
-            :src => 'http://platform.twitter.com/widgets.js'}
-    %script{:type => 'text/javascript', :src => '/jquery.jtwitter.js'}
-    %script{:type => 'text/javascript', :src => '/jquery.googli.js'}
-    %script{:type => 'text/javascript', :src => '/application.js'}
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-24500730-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-  %body
-    #content
-      %h1 Subtwitle
-      %form
-        %label{:for => :username} What's your Twitter handle?
-        %input{:type => :text, :id => :username,
-               :name => :username, :value => @username}
-        %input{:type => :submit, :value => "Go"}
-      #captions
-        .caption
-          %img
-          .tweet
-          %a.tweet_link{:href => 'https://twitter.com/intent/tweet'} Tweet
-    #footer
-      .people
-        .person.kripet
-          %a{:href => 'http://twitter.com/kripet'}
-            %img{:src => 'http://a3.twimg.com/profile_images/291006525/Black___White_Head_normal.jpg'}
-          %span
-            Made by
-            %a{:href => 'http://twitter.com/kripet'} @kripet
-          %div
-            Kristján is a programmer-type who likes to think he has a good sense
-            of what the internet is for. In a <span>vain?</span> attempt to keep
-            his karma positive, he works at
-            %a{:href => 'http://www.causes.com/jobs'} causes.com
-        .person.steve_rit
-          %a{:href => 'http://twitter.com/steve_rit'}
-            %img{:src => 'http://a3.twimg.com/profile_images/452556392/4798_621699776503_207706_35930867_4087695_n_normal.jpg'}
-          %span
-            Inspired  by
-            %a{:href => 'http://twitter.com/steve_rit'} @steve_rit
-          %div
-            Steve had the wonderful idea to attach his tweets to photos, and the
-            sense to want a tool built to help. If not for him, the internet
-            would be 4% less twittilating.
+- add_javascript '/application.js'
+%h1 Subtwitle
+%form
+  %label{:for => :username} What's your Twitter handle?
+  %input{:type => :text, :id => :username,
+         :name => :username, :value => @username}
+  %input{:type => :submit, :value => "Go"}
+#captions
+  .caption
+    %img
+    .tweet
+    %a.tweet_link{:href => 'https://twitter.com/intent/tweet'} Tweet

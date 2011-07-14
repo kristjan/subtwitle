@@ -1,0 +1,11 @@
+%html
+  %head
+    %title Subtwitle
+    %link{:rel => :stylesheet, :type => 'text/css', :href => '/application.css'}
+    = haml :default_javascripts
+    = haml :extra_javascripts
+    = haml :analytics
+  %body
+    #content
+      = yield
+    = haml :footer
