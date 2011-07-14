@@ -9,6 +9,15 @@ html, body{
   line-height: 1.4em;
 }
 
+a {
+  color: #29C;
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  color: #3AD;
+}
+
 h1 {
   color: #29C;
   font-size: 100px;
@@ -59,10 +68,19 @@ input,
   border-radius: 2px;
 }
 
+#captions a.more {
+  background-color: #D5F6FB;
+  display: block;
+  margin: 15px auto;
+  padding: 10px 50px;
+  text-align: center;
+  width: 400px;
+}
+
 .caption {
   background-color: #D5F6FB;
   display: none;
-  margin: 50px auto 100px;
+  margin: 50px auto 0px;
   padding: 40px 50px;
   width: 400px;
 }
@@ -103,11 +121,6 @@ input,
 .person img {
   margin-right: 10px;
   vertical-align: middle;
-}
-.person a {
-  color: #29C;
-  font-weight: bold;
-  text-decoration: none;
 }
 .person div {
   color: #666;

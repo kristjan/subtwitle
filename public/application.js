@@ -46,7 +46,20 @@ Subtwitle = (function() {
 
   var loadSingleTweet = function(tweet_id, image_url) {
     $.jTwitter.tweet(tweet_id, function(tweet) {
-      createCaption(tweet, image_url);
+      caption = createCaption(tweet, image_url);
+      var username = tweet.user.screen_name;
+      var more = $("<a>").
+        text('See more from ' + username).
+        attr('href',
+             location.protocol + '//' + location.host + '/' + username).
+        addClass('more').
+        insertAfter(caption);
+      more.click(function(evt) {
+        evt.preventDefault();
+        $('#username').val(username);
+        $('form').submit();
+        $(this).remove();
+      });
     });
   };
 
@@ -63,6 +76,7 @@ Subtwitle = (function() {
     caption.addClass('loaded');
     caption.appendTo('#captions');
     caption.show();
+    return caption;
   };
 
   var findImage = function(caption) {
