@@ -52,7 +52,7 @@ Subtwitle = (function() {
       caption = createCaption(tweet, image_url);
       var username = tweet.user.screen_name;
       var more = $("<a>").
-        text('See more from ' + username).
+        text('See more from @' + username).
         attr('href',
              location.protocol + '//' + location.host + '/' + username).
         addClass('more').
