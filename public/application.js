@@ -16,17 +16,14 @@ Subtwitle = (function() {
   };
 
   var loadTweets = function(evt) {
-    console.log('loading');
     var match = /\/t\/(\d+)(\/.*)?/.exec(document.URL);
     if (match) {
-      console.log('just one');
       var image_url = match[2]
       if (image_url) image_url = image_url.slice(1); // Remove leading '/'
       loadSingleTweet(match[1], image_url);
     } else {
       var urlParts = document.URL.split('/');
       var username = urlParts[urlParts.length - 1];
-      console.log('user ' + username);
       loadUser(username, true);
     }
   };

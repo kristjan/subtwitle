@@ -38,12 +38,9 @@
         });
       },
       tweet: function(id, fnk) {
-               console.log('Fetching tweet');
         if ( id == 'undefined' ) return;
         var url = "http://twitter.com/statuses/show/" + id + ".json?callback=?";
-        console.log("url " + url);
         $.getJSON( url, function( data ){
-            console.log(data)
           if ( $.isFunction( fnk ) ) {
             fnk.call( this, data );
           }
