@@ -15,26 +15,40 @@
  */
 (function( $ ){
 	$.extend( {
-		jTwitter: function( username, numPosts, fnk ) {
-			var info = {};
+		jTwitter: {
+      timeline: function( username, numPosts, fnk ) {
+        var info = {};
 
-			// If no arguments are sent or only username is set
-			if( username == 'undefined' || numPosts == 'undefined' ) {
-				return;
-			} else if( $.isFunction( numPosts ) ) {
-				// If only username and callback function is set
-				fnk = numPosts;
-				numPosts = 5;
-			}
+        // If no arguments are sent or only username is set
+        if( username == 'undefined' || numPosts == 'undefined' ) {
+          return;
+        } else if( $.isFunction( numPosts ) ) {
+          // If only username and callback function is set
+          fnk = numPosts;
+          numPosts = 5;
+        }
 
-			var url = "http://twitter.com/status/user_timeline/"
-				+ username + ".json?count="+numPosts+"&callback=?";
+        var url = "http://twitter.com/status/user_timeline/"
+          + username + ".json?count="+numPosts+"&callback=?";
 
-			$.getJSON( url, function( data ){
-				if( $.isFunction( fnk ) ) {
-					fnk.call( this, data );
-				}
-			});
-		}
+        $.getJSON( url, function( data ){
+          if( $.isFunction( fnk ) ) {
+            fnk.call( this, data );
+          }
+        });
+      },
+      tweet: function(id, fnk) {
+               console.log('Fetching tweet');
+        if ( id == 'undefined' ) return;
+        var url = "http://twitter.com/statuses/show/" + id + ".json?callback=?";
+        console.log("url " + url);
+        $.getJSON( url, function( data ){
+            console.log(data)
+          if ( $.isFunction( fnk ) ) {
+            fnk.call( this, data );
+          }
+        });
+      }
+    }
 	});
 })( jQuery );
