@@ -3,7 +3,7 @@ Subtwitle = (function() {
     $('form').submit(fireForm);
     $('#username').focus();
     if ($('#username').val().length > 0) $('form').submit();
-    window.onpopstate = loadLastUser;
+    window.onpopstate = loadTweets;
   };
 
   var clearTweets = function() {
@@ -15,15 +15,25 @@ Subtwitle = (function() {
     loadUser($('#username').val());
   };
 
-  var loadLastUser = function(evt) {
-    var urlParts = document.URL.split('/');
-    var username = urlParts[urlParts.length - 1];
-    loadUser(username, true);
+  var loadTweets = function(evt) {
+    console.log('loading');
+    var match = /\/t\/(\d+)(\/.*)?/.exec(document.URL);
+    if (match) {
+      console.log('just one');
+      var image_url = match[2]
+      if (image_url) image_url = image_url.slice(1); // Remove leading '/'
+      loadSingleTweet(match[1], image_url);
+    } else {
+      var urlParts = document.URL.split('/');
+      var username = urlParts[urlParts.length - 1];
+      console.log('user ' + username);
+      loadUser(username, true);
+    }
   };
 
   var loadUser = function(username, popped) {
     if (username.length == 0) return;
-    $.jTwitter(username, 25, function(tweets) {
+    $.jTwitter.timeline(username, 25, function(tweets) {
       clearTweets();
       if (!popped) {
         window.history.pushState(username, 'Subtwitle/' + username,
@@ -32,21 +42,31 @@ Subtwitle = (function() {
       $('#username').val(username).focus();
 
       $.each(tweets, function(i, tweet){
-        var newTweet = $('#captions .caption:first').clone()
-        newTweet.find('.tweet').text(tweet.text);
-        tweetLink = newTweet.find('.tweet_link');
-        tweetLink.attr('href',
-          tweetLink.attr('href') + '?' + $.param({
-            text : "Just found an awesome caption on Subtwitle",
-            url : document.URL
-          })
-        );
-        newTweet.addClass('loaded');
-        newTweet.appendTo('#captions');
-        findImage(newTweet);
-        newTweet.show();
+        createCaption(tweet);
       });
     });
+  };
+
+  var loadSingleTweet = function(tweet_id, image_url) {
+    $.jTwitter.tweet(tweet_id, function(tweet) {
+      createCaption(tweet);
+    });
+  };
+
+  var createCaption = function(tweet) {
+    var caption = $('#captions .caption:first').clone()
+    caption.find('.tweet').text(tweet.text);
+    tweetLink = caption.find('.tweet_link');
+    tweetLink.attr('href',
+      tweetLink.attr('href') + '?' + $.param({
+        text : "Just found an awesome caption on Subtwitle",
+        url : document.URL // Changes as we push and pop
+      })
+    );
+    caption.addClass('loaded');
+    caption.appendTo('#captions');
+    findImage(caption);
+    caption.show();
   };
 
   var findImage = function(caption) {
@@ -80,7 +100,7 @@ Subtwitle = (function() {
     $('.person').each(function(i, person) {
       person = $(person);
       var username = person.clone().removeClass('person').attr('class');
-      $.jTwitter(username, 0, function(tweets) {
+      $.jTwitter.timeline(username, 0, function(tweets) {
         if (tweets.length > 0) {
           var img = person.find('img');
           var photo = tweets[0].user.profile_image_url;
