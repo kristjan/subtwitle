@@ -52,21 +52,16 @@ Subtwitle = (function() {
 
   var createCaption = function(tweet, image_url) {
     var caption = $('#captions .caption:first').clone()
+    caption.attr('data-tweet-id', tweet.id_str);
     caption.find('.tweet').text(tweet.text);
-    tweetLink = caption.find('.tweet_link');
-    tweetLink.attr('href',
-      tweetLink.attr('href') + '?' + $.param({
-        text : "Just found an awesome caption on Subtwitle",
-        url : document.URL // Changes as we push and pop
-      })
-    );
-    caption.addClass('loaded');
-    caption.appendTo('#captions');
     if (typeof (image_url) === 'undefined' || image_url.length == 0) {
       findImage(caption);
     } else {
       caption.find('img').attr('src', image_url);
+      setTweetLink(caption);
     }
+    caption.addClass('loaded');
+    caption.appendTo('#captions');
     caption.show();
   };
 
@@ -78,10 +73,25 @@ Subtwitle = (function() {
         images = $.grep(images, photobucketImage, true);
         images = images.sort(imageSort);
         caption.find('img').attr('src', images[0].url);
+        setTweetLink(caption);
       } else {
-        caption.find('img').hide();
+        caption.find('img').remove();
       }
     });
+  };
+
+  var setTweetLink = function(caption) {
+    var tweetLink = caption.find('.tweet_link');
+    var tweet_id = caption.attr('data-tweet-id');
+    var url = location.protocol + '//' + location.host + '/t/' + tweet_id
+    var image = caption.find('img');
+    if (image.length > 0) url += '/' + image.attr('src');
+    tweetLink.attr('href',
+      'http://twitter.com/intent/tweet' + '?' + $.param({
+        text : "Just found an awesome caption on Subtwitle",
+        url : url
+      })
+    );
   };
 
   var goodWord = function(word, i) {
