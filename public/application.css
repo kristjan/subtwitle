@@ -107,8 +107,7 @@ input,
 }
 
 .people {
-  margin: 0px auto;
-  width: 685px;
+  text-align: center;
 }
 
 .person {
@@ -135,6 +134,9 @@ input,
 .person.kripet {
   text-align: right;
   border-right: 1px solid #3AD;
+}
+.person.steve_rit {
+  text-align: left;
 }
 .tweet_link {
   display: block;
