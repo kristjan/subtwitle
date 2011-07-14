@@ -15,6 +15,7 @@ Subtwitle = (function() {
     loadUser($('#username').val());
   };
 
+  var firstTime = true;
   var loadTweets = function(evt) {
     var match = /\/t\/(\d+)(\/.*)?/.exec(document.URL);
     if (match) {
@@ -26,6 +27,8 @@ Subtwitle = (function() {
       var username = urlParts[urlParts.length - 1];
       loadUser(username, true);
     }
+    if (!firstTime) _gaq.push(['_trackPageview', location.pathname]);
+    firstTime = false;
   };
 
   var loadUser = function(username, popped) {
