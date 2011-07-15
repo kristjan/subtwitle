@@ -134,7 +134,6 @@ input,
   width: 340px;
 }
 .person img {
-  margin-right: 10px;
   vertical-align: middle;
 }
 .person p {
@@ -152,11 +151,17 @@ input,
   text-align: right;
   border-right: 1px solid #3AD;
 }
+.person.kripet img {
+  margin-left: 10px;
+}
 .person.kripet p {
   float: right;
 }
 .person.steve_rit {
   text-align: left;
+}
+.person.steve_rit img {
+  margin-right: 10px;
 }
 .tweet_link {
   display: block;
