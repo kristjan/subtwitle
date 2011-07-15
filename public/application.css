@@ -7,6 +7,7 @@ html, body{
   background-color: #29C;
   font-family: 'Helvetica', 'Arial', sans-serif;
   line-height: 1.4em;
+  text-align: center;
 }
 
 a {
@@ -16,6 +17,10 @@ a {
 }
 a:hover {
   color: #3AD;
+}
+
+img {
+  border: none;
 }
 
 h1 {
@@ -42,6 +47,9 @@ label {
   text-align: center;
   padding: 10px 50px 100px;
   width: 860px;
+}
+* html #content {
+  width: 960px;
 }
 
 form {
@@ -102,20 +110,28 @@ input,
   background-color: #D5F6FB;
   border-radius: 0px 0px 5px 5px;
   margin: 0px auto 50px;
-  padding: 20px;
-  width: 920px;
+  padding: 20px 50px;
+  width: 860px;
+}
+* html #footer {
+  width: 960px;
 }
 
 .people {
-  text-align: center;
+  margin: 0px auto;
+  width: 685px;
 }
 
 .person {
-  display: inline-block;
+  display: block;
+  float: left;
   line-height: 50px;
   padding: 10px 20px;
   vertical-align: top;
   width: 300px;
+}
+* html .person {
+  width: 340px;
 }
 .person img {
   margin-right: 10px;
@@ -123,9 +139,11 @@ input,
 }
 .person div {
   color: #666;
+  display: inline;
   font-size: 12px;
   line-height: 14px;
   margin-top: 15px;
+  width: 260px;
 }
 .person div span {
   color: #999;
@@ -155,3 +173,24 @@ input,
 .tweet_link:active {
   background-position: center -42px;
 }
+
+/* clearfix */
+.clearfix:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0pt;
+  line-height: 0pt;
+  visibility: hidden;
+}
+.clearfix {
+  display: inline-block;
+}
+html[xmlns] .clearfix {
+  display:block;
+}
+* html .clearfix {
+  height:1%;
+}
+/* end clearfix */
+
