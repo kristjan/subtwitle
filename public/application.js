@@ -98,6 +98,7 @@ Subtwitle = (function() {
   var createCaption = function(tweet, image_url) {
     var caption = $('#captions .caption:first').clone()
     caption.attr('data-tweet-id', tweet.id_str);
+    caption.attr('data-username', tweet.user.screen_name);
     caption.find('.tweet').text(tweet.text);
     if (typeof (image_url) === 'undefined' || image_url.length == 0) {
       findImage(caption);
@@ -130,6 +131,7 @@ Subtwitle = (function() {
   var setTweetLink = function(caption) {
     var tweetLink = caption.find('.tweet_link');
     var tweet_id = caption.attr('data-tweet-id');
+    var username = caption.attr('data-username');
     var url = location.protocol + '//' + location.host + '/t/' + tweet_id
     var image = caption.find('img');
     if (image.length > 0) url += '/' + image.attr('src');
@@ -137,7 +139,8 @@ Subtwitle = (function() {
     tweetLink.attr('href',
       'http://twitter.com/intent/tweet' + '?' + $.param({
         text : "Just found an awesome Subtwitle",
-        url : url
+        url : url,
+        via : username
       })
     );
   };
