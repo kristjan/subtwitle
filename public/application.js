@@ -7,7 +7,7 @@ Subtwitle = (function() {
   };
 
   var clearTweets = function() {
-    $('.caption.loaded').remove();
+    $('.caption.loaded, a.more').remove();
   };
 
   var fireForm = function(evt) {
