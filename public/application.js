@@ -31,16 +31,26 @@ Subtwitle = (function() {
     firstTime = false;
   };
 
+  var historyAvailable = function() {
+    return !!(window.history && history.pushState);
+  }
+
   var loadUser = function(username, popped) {
     if (username.length == 0) return;
+    if (historyAvailable() && !popped) {
+      window.history.pushState(
+        username, 'Subtwitle/' + username, '/' + username);
+    } else {
+      var newUrl = location.protocol + '//' + location.host + '/' + username;
+      console.log(newUrl);
+      if (window.location != newUrl) {
+        window.location = newUrl;
+        return;
+      }
+    }
     $.jTwitter.timeline(username, 25, function(tweets) {
       clearTweets();
-      if (!popped) {
-        window.history.pushState(username, 'Subtwitle/' + username,
-                                 '/' + username);
-      }
       $('#username').val(username).focus();
-
       $.each(tweets, function(i, tweet){
         createCaption(tweet);
       });
