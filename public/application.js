@@ -64,6 +64,7 @@ Subtwitle = (function() {
 
   var loadSingleTweet = function(tweet_id, image_url) {
     $.jTwitter.tweet(tweet_id, function(tweet) {
+      clearTweets();
       caption = createCaption(tweet, image_url);
       var username = tweet.user.screen_name;
       var more = $("<a>").
