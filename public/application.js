@@ -89,6 +89,7 @@ Subtwitle = (function() {
     if (typeof (image_url) === 'undefined' || image_url.length == 0) {
       findImage(caption);
     } else {
+      image_url = revealImageExtension(image_url);
       caption.find('img').attr('src', image_url);
       setTweetLink(caption);
     }
@@ -119,9 +120,10 @@ Subtwitle = (function() {
     var url = location.protocol + '//' + location.host + '/t/' + tweet_id
     var image = caption.find('img');
     if (image.length > 0) url += '/' + image.attr('src');
+    url = hideImageExtension(url);
     tweetLink.attr('href',
       'http://twitter.com/intent/tweet' + '?' + $.param({
-        text : "Just found an awesome caption on Subtwitle",
+        text : "Just found an awesome Subtwitle",
         url : url
       })
     );
@@ -161,6 +163,24 @@ Subtwitle = (function() {
   var squareness = function(img) {
     var ratio = parseInt(img.height)/parseInt(img.width);
     return (ratio < 1) ? 1/ratio : ratio;
+  };
+
+  IMAGE_EXTENSION_RE = /\.([^.]+)$/
+  var hideImageExtension = function(url) {
+    var match = IMAGE_EXTENSION_RE.exec(url);
+    if (match && match[1].length < 5) {
+      url = url.replace(IMAGE_EXTENSION_RE, '_$1')
+    }
+    return url;
+  };
+
+  HIDDEN_IMAGE_EXTENSION_RE = /_([^_]+)$/
+  var revealImageExtension = function(url) {
+    var match = HIDDEN_IMAGE_EXTENSION_RE.exec(url);
+    if (match && match[1].length < 5) {
+      url = url.replace(HIDDEN_IMAGE_EXTENSION_RE, '.$1');
+    }
+    return url;
   };
 
   return {
