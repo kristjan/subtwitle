@@ -17,12 +17,12 @@ Subtwitle = (function() {
 
   var pageLoaded = false;
   var statePopped = function(evt) {
-    if (evt.state || pageLoaded) loadTweets(evt);
+    if (evt.state || pageLoaded) loadTweets();
     pageLoaded = true;
   };
 
   var firstTime = true;
-  var loadTweets = function(evt) {
+  var loadTweets = function() {
     var match = /\/t\/(\d+)(\/.*)?/.exec(document.URL);
     if (match) {
       var image_url = match[2]
