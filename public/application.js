@@ -1,4 +1,5 @@
 Subtwitle = (function() {
+  /* Initialization */
   var init = function() {
     window.onpopstate = statePopped;
     $('form').submit(fireForm);
@@ -6,10 +7,21 @@ Subtwitle = (function() {
     $('#username').focus();
   };
 
-  var clearTweets = function() {
-    $('.caption.loaded, a.more').remove();
+  var loadPhotos = function() {
+    $('.person').each(function(i, person) {
+      person = $(person);
+      var username = person.clone().removeClass('person').attr('class');
+      $.jTwitter.timeline(username, 0, function(tweets) {
+        if (tweets.length > 0) {
+          var img = person.find('img');
+          var photo = tweets[0].user.profile_image_url;
+          img.attr('src', photo);
+        }
+      });
+    });
   };
 
+  /* Event Handlers */
   var fireForm = function(evt) {
     evt.preventDefault();
     loadUser($('#username').val());
@@ -19,6 +31,11 @@ Subtwitle = (function() {
   var statePopped = function(evt) {
     if (evt.state || pageLoaded) loadTweets();
     pageLoaded = true;
+  };
+
+  /* Tweet manipulation */
+  var clearTweets = function() {
+    $('.caption.loaded, a.more').remove();
   };
 
   var firstTime = true;
@@ -36,10 +53,6 @@ Subtwitle = (function() {
     if (!firstTime) _gaq.push(['_trackPageview', location.pathname]);
     firstTime = false;
   };
-
-  var historyAvailable = function() {
-    return !!(window.history && history.pushState);
-  }
 
   var loadUser = function(username, popped) {
     if (username.length == 0) return;
@@ -129,10 +142,15 @@ Subtwitle = (function() {
     );
   };
 
+  /* Utility Methods */
+  var historyAvailable = function() {
+    return !!(window.history && history.pushState);
+  };
+
   var goodWord = function(word, i) {
     if (word.match(/^[\W]/)) return false;
     return word.length > 5;
-  }
+  };
 
   var imageSort = function(a, b) {
     return imageScore(b) - imageScore(a);
@@ -140,20 +158,6 @@ Subtwitle = (function() {
 
   var imageScore = function(img) {
     return parseInt(img.width);
-  };
-
-  var loadPhotos = function() {
-    $('.person').each(function(i, person) {
-      person = $(person);
-      var username = person.clone().removeClass('person').attr('class');
-      $.jTwitter.timeline(username, 0, function(tweets) {
-        if (tweets.length > 0) {
-          var img = person.find('img');
-          var photo = tweets[0].user.profile_image_url;
-          img.attr('src', photo);
-        }
-      });
-    });
   };
 
   var photobucketImage = function(img) {
