@@ -137,9 +137,8 @@ input,
   margin-right: 10px;
   vertical-align: middle;
 }
-.person div {
+.person p {
   color: #666;
-  display: inline;
   font-size: 12px;
   line-height: 14px;
   margin-top: 15px;
@@ -152,6 +151,9 @@ input,
 .person.kripet {
   text-align: right;
   border-right: 1px solid #3AD;
+}
+.person.kripet p {
+  float: right;
 }
 .person.steve_rit {
   text-align: left;
