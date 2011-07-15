@@ -1,9 +1,9 @@
 Subtwitle = (function() {
   var init = function() {
+    window.onpopstate = statePopped;
     $('form').submit(fireForm);
+    loadTweets();
     $('#username').focus();
-    if ($('#username').val().length > 0) $('form').submit();
-    window.onpopstate = loadTweets;
   };
 
   var clearTweets = function() {
@@ -13,6 +13,12 @@ Subtwitle = (function() {
   var fireForm = function(evt) {
     evt.preventDefault();
     loadUser($('#username').val());
+  };
+
+  var pageLoaded = false;
+  var statePopped = function(evt) {
+    if (evt.state || pageLoaded) loadTweets(evt);
+    pageLoaded = true;
   };
 
   var firstTime = true;
@@ -42,7 +48,6 @@ Subtwitle = (function() {
         username, 'Subtwitle/' + username, '/' + username);
     } else {
       var newUrl = location.protocol + '//' + location.host + '/' + username;
-      console.log(newUrl);
       if (window.location != newUrl) {
         window.location = newUrl;
         return;
@@ -50,10 +55,10 @@ Subtwitle = (function() {
     }
     $.jTwitter.timeline(username, 25, function(tweets) {
       clearTweets();
-      $('#username').val(username).focus();
       $.each(tweets, function(i, tweet){
         createCaption(tweet);
       });
+      $('#username').val(username).focus();
     });
   };
 
