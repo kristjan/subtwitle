@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'haml'
 require 'omniauth'
 require 'sinatra/base'
+require 'twitter'
 require 'application'
 
 use Rack::Session::Cookie, :key => 'rack.session',
@@ -14,6 +15,12 @@ use Rack::Session::Cookie, :key => 'rack.session',
 use OmniAuth::Builder do
   provider :twitter, ENV['TWITTER_CONSUMER_KEY'],
                      ENV['TWITTER_CONSUMER_SECRET']
+end
+
+
+Twitter.configure do |config|
+  config.consumer_key    = ENV['TWITTER_CONSUMER_KEY']
+  config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
 end
 
 run Application

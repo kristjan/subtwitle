@@ -9,6 +9,16 @@ class Application < Sinatra::Base
     redirect '/home'
   end
 
+  get '/user/timeline' do
+    headers "Content-Type" => 'text/json'
+    if session['twitter']
+      client = Twitter::Client.new(
+        :oauth_token => session['twitter']['token'],
+        :oauth_token_secret => session['twitter']['secret'])
+      client.home_timeline.to_json
+    end
+  end
+
   get %r{/t/(\d+)(/.*)?} do |tweet_id, image_url|
     haml :index
   end
