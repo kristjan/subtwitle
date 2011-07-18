@@ -25,6 +25,7 @@ class Application < Sinatra::Base
 
   get '/:username?/?' do
     @username = params[:username]
+    @home_available = !!session[:twitter]
     haml :index
   end
 

@@ -1,8 +1,9 @@
 #stream_selector.clearfix
   .my_stream
-    %label See Your Stream
-    %a{:href => '/auth/twitter'}
-      %img{:src => 'http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png'}
+    - if @home_available
+      %a#home{:href => '/home'} Read Your Stream
+    - else
+      %a{:href => '/auth/twitter'} Read Your Stream
   .or or
   .user_stream
     %form
