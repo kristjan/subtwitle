@@ -35,15 +35,6 @@ h1 span {
   font-size: 20px;
 }
 
-label {
-  display: block;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 1.4em;
-  margin: 5px auto 10px;
-  text-align: center;
-}
-
 #content {
   background-color: #FFF;
   margin: 0px auto;
@@ -55,23 +46,52 @@ label {
   width: 960px;
 }
 
-form {
-  margin: 0px auto 50px;
+#stream_selector {
+  font-size: 16px;
+  margin: 0px auto;
+  width: 485px;
 }
-
-input[type=text] {
-  font-size: 20px;
+#stream_selector div {
+  height: 30px;
+  float: left;
+  line-height: 30px;
+  vertical-align: middle;
+}
+#stream_selector label {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.4em;
+  margin-right: 5px;
+  text-align: center;
+}
+#stream_selector .my_stream {
+  padding-top: 1px;
+}
+#stream_selector .my_stream img {
   padding: 5px;
 }
-
-input[type=submit] {
+#stream_selector .or {
+  color: #999;
+  font-size: 12px;
+  font-style: italic;
+  padding-top: 1px;
+  width: 40px;
+}
+#stream_selector input[type=text] {
+  font-size: 16px;
+  margin: 1px 0px 0px;
+  padding: 3px 5px;
+}
+#stream_selector input[type=submit] {
   color: #FFF;
   background-color: #29C;
   border: 3px solid #07A;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
-  height: 37px;
-  width: 37px;
+  height: 28px;
+  margin-top: 1px;
+  vertical-align: top;
+  width: 28px;
 }
 
 input,

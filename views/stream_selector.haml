@@ -1,0 +1,13 @@
+#stream_selector.clearfix
+  .my_stream
+    - if @home_available
+      %a#home{:href => '/home'} Read Your Stream
+    - else
+      %a{:href => '/auth/twitter'} Read Your Stream
+  .or or
+  .user_stream
+    %form
+      %label{:for => :username} Pick a User
+      %input{:type => :text, :id => :username,
+             :name => :username, :value => @username}
+      %input{:type => :submit, :value => "Go"}

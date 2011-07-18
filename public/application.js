@@ -1,7 +1,9 @@
 Subtwitle = (function() {
+
   /* Initialization */
   var init = function() {
     window.onpopstate = statePopped;
+    $('#home').click(fireHome);
     $('form').submit(fireForm);
     loadTweets();
     $('#username').focus();
@@ -27,6 +29,11 @@ Subtwitle = (function() {
     loadUser($('#username').val());
   };
 
+  var fireHome = function(evt) {
+    evt.preventDefault();
+    loadHome();
+  };
+
   var pageLoaded = false;
   var statePopped = function(evt) {
     if (evt.state || pageLoaded) loadTweets();
@@ -48,7 +55,8 @@ Subtwitle = (function() {
     } else {
       var urlParts = document.URL.split('/');
       var username = urlParts[urlParts.length - 1];
-      loadUser(username, true);
+      if (username === 'home') loadHome(true);
+      else loadUser(username, true);
     }
     if (!firstTime) _gaq.push(['_trackPageview', location.pathname]);
     firstTime = false;
@@ -93,6 +101,25 @@ Subtwitle = (function() {
         $(this).remove();
       });
     });
+  };
+
+  var loadHome = function(popped) {
+    if (historyAvailable() && !popped) {
+      window.history.pushState('home', 'Subtwitle/Home', '/home');
+    } else {
+      var newUrl = location.protocol + '//' + location.host + '/home';
+      if (window.location != newUrl) {
+        window.location = newUrl;
+        return;
+      }
+    }
+    $.get('/user/timeline', function(tweets) {
+      clearTweets();
+      $.each(tweets, function(i, tweet){
+        createCaption(tweet);
+      });
+    });
+    $('#username').val('');
   };
 
   var createCaption = function(tweet, image_url) {
