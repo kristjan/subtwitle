@@ -1,0 +1,12 @@
+#stream_selector.clearfix
+  .my_stream
+    %label See Your Stream
+    %a{:href => '/auth/twitter'}
+      %img{:src => 'http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png'}
+  .or or
+  .user_stream
+    %form
+      %label{:for => :username} Pick a User
+      %input{:type => :text, :id => :username,
+             :name => :username, :value => @username}
+      %input{:type => :submit, :value => "Go"}

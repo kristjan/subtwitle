@@ -55,8 +55,26 @@ label {
   width: 960px;
 }
 
-form {
+#stream_selector {
   margin: 0px auto 50px;
+  width: 700px;
+}
+#stream_selector div {
+  height: 100px;
+  float: left;
+  width: 300px;
+}
+#stream_selector .my_stream {
+}
+#stream_selector .my_stream img {
+  padding: 5px;
+}
+#stream_selector .or {
+  color: #999;
+  font-style: italic;
+  margin: 0px 30px 0px 0px;
+  padding: 35px 0px;
+  width: 20px;
 }
 
 input[type=text] {
