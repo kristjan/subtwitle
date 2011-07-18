@@ -1,9 +1,13 @@
-require 'sinatra/base'
-require 'haml'
-
 class Application < Sinatra::Base
   set :root, File.join(File.dirname(__FILE__), '..')
   set :public, File.join(root, 'public')
+
+  get '/auth/:provider/callback' do
+    auth = request.env['omniauth.auth']
+    session['twitter'] = {'token'  => auth['credentials']['token'],
+                          'secret' => auth['credentials']['secret']}
+    redirect '/home'
+  end
 
   get %r{/t/(\d+)(/.*)?} do |tweet_id, image_url|
     haml :index
