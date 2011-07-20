@@ -1,13 +1,13 @@
 %html
   %head
-    %title Subtwitle
+    %title Subtwitles
     %link{:rel => :stylesheet, :type => 'text/css', :href => '/application.css'}
     = haml :default_javascripts
     = haml :extra_javascripts
     = haml :analytics
   %body
     #content
-      %h1 Subtwitle<span>™</span>
+      %h1 Subtwitles
       = haml :stream_selector
       = yield
     = haml :footer
