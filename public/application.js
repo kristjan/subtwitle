@@ -163,11 +163,13 @@ Subtwitle = (function() {
     var image = caption.find('img');
     if (image.length > 0) url += '/' + image.attr('src');
     url = hideImageExtension(url);
+    var percent = 20 + Math.floor(Math.random()*70);
     tweetLink.attr('href',
       'http://twitter.com/intent/tweet' + '?' + $.param({
-        text : "Just found an awesome Subtwitle",
+        text : "Reading @" + username + "'s stream is " + percent +
+               "% more awesome with Subtwitles",
         url : url,
-        via : username
+        via : 'subtwitles'
       })
     );
   };
