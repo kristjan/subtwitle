@@ -129,6 +129,10 @@ input,
   text-align: left;
 }
 
+.permalink {
+  float: right;
+}
+
 #footer {
   background-color: #D5F6FB;
   border-radius: 0px 0px 5px 5px;
@@ -186,6 +190,7 @@ input,
 .person.steve_rit img {
   margin-right: 10px;
 }
+
 .twitter_button {
   background: #D5E6EF; /* Old browsers */
   background: url('/link.gif'), -moz-linear-gradient(top, #FFFFFF 0%, #D5E6EF 100%); /* FF3.6+ */
@@ -233,9 +238,6 @@ input,
   border-color: #7AB8DF;
   color: #658A9D;
 }
-.permalink {
-  float: right;
-}
 .tweet_link {
   display: block;
   height: 20px;
@@ -252,6 +254,10 @@ input,
 }
 .tweet_link:active {
   background-position: center -42px;
+}
+
+#permalink_dialog {
+  display: none;
 }
 
 /* clearfix */
