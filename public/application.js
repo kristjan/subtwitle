@@ -163,10 +163,10 @@ Subtwitle = (function() {
         images = $.grep(images, photobucketImage, true);
         images = images.sort(imageSort);
         caption.find('img').attr('src', images[0].url);
-        setLinks(caption);
       } else {
         caption.find('img').remove();
       }
+      setLinks(caption);
     });
   };
 
