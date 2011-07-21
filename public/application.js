@@ -5,6 +5,7 @@ Subtwitle = (function() {
     window.onpopstate = statePopped;
     $('#home').click(fireHome);
     $('form').submit(fireForm);
+    $('.permalink').click(copyPermalink);
     loadTweets();
     $('#username').focus();
   };
@@ -38,6 +39,10 @@ Subtwitle = (function() {
   var statePopped = function(evt) {
     if (evt.state || pageLoaded) loadTweets();
     pageLoaded = true;
+  };
+
+  var copyPermalink = function(evt) {
+    evt.preventDefault();
   };
 
   /* Tweet manipulation */
@@ -157,18 +162,13 @@ Subtwitle = (function() {
 
   var setTweetLink = function(caption) {
     var tweetLink = caption.find('.tweet_link');
-    var tweet_id = caption.attr('data-tweet-id');
     var username = caption.attr('data-username');
-    var url = location.protocol + '//' + location.host + '/t/' + tweet_id
-    var image = caption.find('img');
-    if (image.length > 0) url += '/' + image.attr('src');
-    url = hideImageExtension(url);
     var percent = 20 + Math.floor(Math.random()*70);
     tweetLink.attr('href',
       'http://twitter.com/intent/tweet' + '?' + $.param({
         text : "Reading @" + username + "'s stream is " + percent +
                "% more awesome with Subtwitles",
-        url : url,
+        url : permalink(caption),
         via : 'subtwitles'
       })
     );
@@ -217,6 +217,14 @@ Subtwitle = (function() {
       url = url.replace(HIDDEN_IMAGE_EXTENSION_RE, '.$1');
     }
     return url;
+  };
+
+  var permalink = function(caption) {
+    var tweet_id = caption.attr('data-tweet-id');
+    var image = caption.find('img');
+    var url = location.protocol + '//' + location.host + '/t/' + tweet_id
+    if (image.length > 0) url += '/' + image.attr('src');
+    return hideImageExtension(url);
   };
 
   return {

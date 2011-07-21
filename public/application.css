@@ -186,6 +186,56 @@ input,
 .person.steve_rit img {
   margin-right: 10px;
 }
+.twitter_button {
+  background: #D5E6EF; /* Old browsers */
+  background: url('/link.gif'), -moz-linear-gradient(top, #FFFFFF 0%, #D5E6EF 100%); /* FF3.6+ */
+  background: url('/link.gif'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#D5E6EF)); /* Chrome,Safari4+ */
+  background: url('/link.gif'), -webkit-linear-gradient(top, #FFFFFF 0%,#D5E6EF 100%); /* Chrome10+,Safari5.1+ */
+  background: url('/link.gif'), -o-linear-gradient(top, #FFFFFF 0%,#D5E6EF 100%); /* Opera11.10+ */
+  background: url('/link.gif'), -ms-linear-gradient(top, #FFFFFF 0%,#D5E6EF 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#D5E6EF',GradientType=0 ); /* IE6-9 */
+  background: url('/link.gif'), linear-gradient(top, #FFFFFF 0%,#D5E6EF 100%); /* W3C */
+  background-position: 0px 0px;
+  background-position: 2px 1px, 0px 0px;
+  background-repeat: no-repeat;
+  border: 1px solid #A4CCE5;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border-radius: 3px;
+  color: #186487;
+  font: normal 11px 'Lucida Grand', sans-serif;
+  line-height: 11px;
+  margin: 5px;
+  padding: 4px 4px 4px 20px;
+}
+.twitter_button:hover {
+  background: #BFDFED; /* Old browsers */
+  background: url('/link.gif'), -moz-linear-gradient(top, #F2F8FC 0%, #BFDFED 100%); /* FF3.6+ */
+  background: url('/link.gif'), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F8FC), color-stop(100%,#BFDFED)); /* Chrome,Safari4+ */
+  background: url('/link.gif'), -webkit-linear-gradient(top, #F2F8FC 0%,#BFDFED 100%); /* Chrome10+,Safari5.1+ */
+  background: url('/link.gif'), -o-linear-gradient(top, #F2F8FC 0%,#BFDFED 100%); /* Opera11.10+ */
+  background: url('/link.gif'), -ms-linear-gradient(top, #F2F8FC 0%,#BFDFED 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F8FC', endColorstr='#BFDFED',GradientType=0 ); /* IE6-9 */
+  background: url('/link.gif'), linear-gradient(top, #F2F8FC 0%,#BFDFED 100%); /* W3C */
+  background-position: 0px 0px;
+  background-position: 2px 1px, 0px 0px;
+  background-repeat: no-repeat;
+  border-color: #53A3D6;
+  color: #0B3752;
+}
+.twitter_button:active {
+  background: #CEE5F4; /* Old browsers */
+  background: url('/link.gif'), #CEE5F4;
+  background-position: 0px 0px;
+  background-position: 2px 1px, 0px 0px;
+  background-repeat: no-repeat;
+  border-color: #7AB8DF;
+  color: #658A9D;
+}
+.permalink {
+  float: right;
+}
 .tweet_link {
   display: block;
   height: 20px;
