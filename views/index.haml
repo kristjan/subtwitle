@@ -1,6 +1,15 @@
-- javascripts 'application'
+- javascripts 'facebox', 'application'
+- stylesheets 'facebox'
 #captions
   .caption
     %img
     .tweet
-    %a.tweet_link{:href => 'https://twitter.com/intent/tweet'} Tweet
+    .actions
+      %a.tweet_link{:href => 'https://twitter.com/intent/tweet'} Tweet
+      %a.permalink.twitter_button{:href => '/'} Copy Link
+#permalink_dialog
+  %input{:type => 'text', :readonly => true}
+  %p
+    This link will take you straight to the Subtwitle you just clicked on.
+    %br/
+    Paste it anywhere you like, even on a stranger.

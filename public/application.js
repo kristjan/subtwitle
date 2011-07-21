@@ -5,8 +5,14 @@ Subtwitle = (function() {
     window.onpopstate = statePopped;
     $('#home').click(fireHome);
     $('form').submit(fireForm);
+    initPermalinkDialog();
+    $('.permalink').live('click', showPermalink);
     loadTweets();
     $('#username').focus();
+  };
+
+  var initPermalinkDialog = function() {
+    $.facebox.settings.opacity = .5;
   };
 
   var loadPhotos = function() {
@@ -38,6 +44,15 @@ Subtwitle = (function() {
   var statePopped = function(evt) {
     if (evt.state || pageLoaded) loadTweets();
     pageLoaded = true;
+  };
+
+  var showPermalink = function(evt) {
+    evt.preventDefault();
+    $.facebox({div: '#permalink_dialog'});
+    var link = $('#facebox input[type=text]');
+    var url = $(this).attr('href');
+    link.bind('click focus', function() { link.select(); });
+    link.focus().val(url).select();
   };
 
   /* Tweet manipulation */
@@ -132,7 +147,7 @@ Subtwitle = (function() {
     } else {
       image_url = revealImageExtension(image_url);
       caption.find('img').attr('src', image_url);
-      setTweetLink(caption);
+      setLinks(caption);
     }
     caption.addClass('loaded');
     caption.appendTo('#captions');
@@ -148,25 +163,20 @@ Subtwitle = (function() {
         images = $.grep(images, photobucketImage, true);
         images = images.sort(imageSort);
         caption.find('img').attr('src', images[0].url);
-        setTweetLink(caption);
+        setLinks(caption);
       } else {
         caption.find('img').remove();
       }
     });
   };
 
-  var setTweetLink = function(caption) {
-    var tweetLink = caption.find('.tweet_link');
-    var tweet_id = caption.attr('data-tweet-id');
-    var username = caption.attr('data-username');
-    var url = location.protocol + '//' + location.host + '/t/' + tweet_id
-    var image = caption.find('img');
-    if (image.length > 0) url += '/' + image.attr('src');
-    url = hideImageExtension(url);
-    var percent = 20 + Math.floor(Math.random()*70);
-    tweetLink.attr('href',
+  var setLinks = function(caption) {
+    var url = permalink(caption);
+    caption.find('.permalink').attr('href', url);
+    caption.find('.tweet_link').attr('href',
       'http://twitter.com/intent/tweet' + '?' + $.param({
-        text : "Reading @" + username + "'s stream is " + percent +
+        text : "Reading @" + caption.attr('data-username') + "'s stream is " +
+               (20 + Math.floor(Math.random()*70)) +
                "% more awesome with Subtwitles",
         url : url,
         via : 'subtwitles'
@@ -217,6 +227,14 @@ Subtwitle = (function() {
       url = url.replace(HIDDEN_IMAGE_EXTENSION_RE, '.$1');
     }
     return url;
+  };
+
+  var permalink = function(caption) {
+    var tweet_id = caption.attr('data-tweet-id');
+    var image = caption.find('img');
+    var url = location.protocol + '//' + location.host + '/t/' + tweet_id
+    if (image.length > 0) url += '/' + image.attr('src');
+    return hideImageExtension(url);
   };
 
   return {

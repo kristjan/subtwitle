@@ -41,5 +41,11 @@ class Application < Sinatra::Base
       @_javascripts += scripts
       @_javascripts
     end
+
+    def stylesheets(*styles)
+      @_stylesheets ||= []
+      @_stylesheets += styles
+      @_stylesheets
+    end
   end
 end
